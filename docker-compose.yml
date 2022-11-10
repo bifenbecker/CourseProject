@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db-postgres:
+    image: postgres
+    restart: always
+    ports:
+      - '5439:5432'
+    volumes:
+      - avto_service_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: avto_service_data
+
+  db-redis:
+    image: redis
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - '6379:6379'
+    restart: always
+
+
+volumes:
+  avto_service_data:
